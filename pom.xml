@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>club.zendipia</groupId>
+    <artifactId>neo-sc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <dotnet.exec.path>dotnet</dotnet.exec.path>
+        <neoj.dll.path>/Users/vferrer/NEO/neo-compiler/neoj/bin/Release/netcoreapp1.1/neoj.dll</neoj.dll.path>
+        <sc.entry.point>target/classes/club/zendipia/neo/HelloWorld.class</sc.entry.point>
+        <target.neo.compiled>target/neo/</target.neo.compiled>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.neo.smartcontract.framework</groupId>
+            <artifactId>neo-devpack-java</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo>Executing ${dotnet.exec.path} ${neoj.dll.path} ${sc.entry.point}</echo>
+                                <exec executable="${dotnet.exec.path}"
+                                      spawn="false">
+                                    <arg value="${neoj.dll.path}"/>
+                                    <arg value="${sc.entry.point}"/>
+                                </exec>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
